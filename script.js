@@ -5,7 +5,6 @@ const MAX_CPS = 25;// clicks per second
 const MAX_LEGAL_CLICK_POWER = 30000;
 let cheatAttempts = 0;
 
-
 const generators = [
 {name: "Person", amount: 0, baseCost: 100, auraGain: 1, scale: 1.07},
 {name: "Skibidi Toilet", amount: 0, baseCost: 600, auraGain: 5, scale: 1.05},
@@ -18,7 +17,6 @@ const generators = [
 {name: "Sigma Caden", amount: 0, baseCost: 1069690, auraGain: 10000, scale: 1.025},
 {name: "Sigma Zhengxian", amount: 0, baseCost: 2000000, auraGain: 16969, scale: 1.02},
 {name: "Xuhui Mewer", amount: 0, baseCost: 100000000, auraGain: 69690, scale: 1.03},
-{name: "Shiv", amount: 0, baseCost: 1000000000, auraGain: 0.001, scale: 20},
 {name: "Mutated Xuhui", amount: 0, baseCost: 5000000000, auraGain: 3000000, scale: 1.025},
 {name: "Geometry Darsh", amount: 0, baseCost: 999999999, auraGain: 10000000, scale: 1.025}
 ];
