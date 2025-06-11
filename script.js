@@ -22,24 +22,24 @@ const generators = [
 ];
 
 const upgrades = [
-{name: "Grind SLS (x2 click)", cost: 1000, effect: () => auraPerClick *= 2},
-{name: "Persons x2", cost: 1500, effect: () => generators[0].auraGain *= 2},
-{name: "Xinyuan helps (x5 click)", cost: 4000, effect: () => auraPerClick *= 5},
-{name: "Skibidi Toilets x2", cost: 30000, effect: () => generators[1].auraGain *= 2},
-{name: "Click +15", cost: 50000, effect: () => auraPerClick += 15},
-{name: "Mewers x1.5", cost: 60000, effect: () => generators[2].auraGain *= 1.5},
-{name: "Ziheng helps (x1.5 click)", cost: 500000, effect: () => auraPerClick *= 1.5},
-{name: "Johnny helps (x4 click)", cost: 10000000, effect: () => auraPerClick *= 4},
-{name: "Sigma skibidi x2", cost: 10000000, effect: () => generators[5].auraGain *= 2},
-{name: "Sigma Caden x2", cost: 500000000, effect: () => generators[8].auraGain *= 2},
-{name: "YUSU helps (x10 click)", cost: 2000000000, effect: () => auraPerClick *= 10},
-{name: "Yuansan helps (x10 click)", cost: 9000000000, effect: () => auraPerClick *= 10},
-{name: "Unlock Crypto Stocks 💎", cost: 10000000000, effect: () => cryptoUnlocked = true},
-{name: "Xuhui upgrade", cost: 90909090909, effect: () => generators[10].auraGain *= 2.5} ,
-{name: ":Shreyas Helps", cost: 90909090969, effect: () => auraPerClick *= 5},
-{name: "Uno Reverse", cost: 694206942069, effect: () => auraPerClick *= 9999},
-{name: "Mental stability", cost: 83294783798, effect: () => auraPerClick *=8},
-{name: "Darsh Helps", cost: 100, effect: ()=> auraPerClick **=2}
+{name: "Grind SLS (x2 click)", cost: 1000, effect: () => auraPerClick *= 2, bought: false},
+{name: "Persons x2", cost: 1500, effect: () => generators[0].auraGain *= 2, bought: false},
+{name: "Xinyuan helps (x5 click)", cost: 4000, effect: () => auraPerClick *= 5, bought: false},
+{name: "Skibidi Toilets x2", cost: 30000, effect: () => generators[1].auraGain *= 2, bought: false},
+{name: "Click +15", cost: 50000, effect: () => auraPerClick += 15, bought: false},
+{name: "Mewers x1.5", cost: 60000, effect: () => generators[2].auraGain *= 1.5, bought: false},
+{name: "Ziheng helps (x1.5 click)", cost: 500000, effect: () => auraPerClick *= 1.5, bought: false},
+{name: "Johnny helps (x4 click)", cost: 10000000, effect: () => auraPerClick *= 4, bought: false},
+{name: "Sigma skibidi x2", cost: 10000000, effect: () => generators[5].auraGain *= 2, bought: false},
+{name: "Sigma Caden x2", cost: 500000000, effect: () => generators[8].auraGain *= 2, bought: false},
+{name: "YUSU helps (x10 click)", cost: 2000000000, effect: () => auraPerClick *= 10, bought: false},
+{name: "Yuansan helps (x10 click)", cost: 9000000000, effect: () => auraPerClick *= 10, bought: false},
+{name: "Unlock Crypto Stocks 💎", cost: 10000000000, effect: () => cryptoUnlocked = true, bought: false},
+{name: "Xuhui upgrade", cost: 90909090909, effect: () => generators[10].auraGain *= 2.5, bought: false} ,
+{name: ":Shreyas Helps", cost: 90909090969, effect: () => auraPerClick *= 5, bought: false},
+{name: "Uno Reverse", cost: 694206942069, effect: () => auraPerClick *= 9999, bought: false},
+{name: "Mental Stability", cost: 83294783798, effect: () => auraPerClick *=8, bought: false},
+{name: "Darsh Helps", cost: 100, effect: ()=> auraPerClick **=2, bought: false}
 ];
 
 const stocks = [
@@ -51,9 +51,9 @@ const stocks = [
 ];
 
 const cryptoStocks = [
-{name: "MewCoin", price: 500000, high: 5000, low: 500, last: 500},
-{name: "XynCash", price: 800000, high: 80000, low: 800, last: 800},
-{name: "CadenETH", price: 1300000, high: 130000, low: 1300, last: 1300}
+{name: "MewCoin", price: 500000, high: 500000, low: 500000, last: 500000},
+{name: "XynCash", price: 800000, high: 800000, low: 800000, last: 800000},
+{name: "CadenETH", price: 1300000, high: 1300000, low: 1300000, last: 1300000}
 ];
 
 let stockOwned = Array(stocks.length).fill(0);
@@ -92,7 +92,6 @@ document.getElementById("click-btn").onclick = () => {
   updateUI();
 };
 
-
 function buyGen(i) {
   const g = generators[i];
   const cost = Math.round(g.baseCost * Math.pow(g.scale, g.amount));
@@ -130,17 +129,16 @@ function updateUI() {
   renderStocks();
 }
 
-
 function renderShop() {
   const shop = document.getElementById("shop-list");
   shop.innerHTML = "";
   generators.forEach((g, i) => {
     const cost = Math.round(g.baseCost * Math.pow(g.scale, g.amount));
     shop.innerHTML += `
-      <div class="item">
-        <div><strong>${g.name}</strong> (${g.amount})<br>+${g.auraGain}/s — Cost: ${cost}</div>
-        <button onclick="buyGen(${i})">Buy</button>
-      </div>`;
+    <div class="item">
+      <div><strong>${g.name}</strong> (${g.amount})<br>+${g.auraGain}/s — Cost: ${cost}</div>
+      <button onclick="buyGen(${i})">Buy</button>
+    </div>`;
   });
 }
 
@@ -259,4 +257,12 @@ updateAuraPerSecond();
 updateUI();
 renderLeaderboard();
 
-window.addEventListener("keydown", localStorage("aura",aura))
+window.addEventListener("keydown", () => {
+  localStorage.setItem("aura", aura);
+});
+
+mewcanvas = document.getElementById("mew");
+jonnycanvas = document.getElementById("johnny");
+auracanvas = document.getElementById("aura");
+toiletcanvas = document.getElementById("toilet");
+pennycanvas = document.getElementById("penny");

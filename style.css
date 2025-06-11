@@ -56,6 +56,7 @@ button:active {transform: scale(0.85)}
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  box-shadow: 0em 0em 1em;
 }
 .item div, .upgrade div {
   text-align: left;
@@ -72,21 +73,10 @@ button:active {transform: scale(0.85)}
 }
 .stock-arrow.up {color: green;}
 .stock-arrow.down {color: red;}
-#login-logo {
-  border-radius: 1em;
-  width: 82vw;
-  max-width: 49em;
-  box-shadow: 0em 0em 1em black;
-}
 #sd {
   border-radius: 0.5em;
   height: 3em;
   box-shadow: 0em 0em 1em black;
-}
-@media (prefers-color-scheme: dark) {
-  .card {background: #2e2734}
-  h2 {color: #dfe6e9;}
-  #buycrypto {color: white;}
 }
 
 .triple-container {
