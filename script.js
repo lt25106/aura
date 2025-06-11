@@ -1,3 +1,9 @@
+mewcanvas = document.getElementById("mew");
+jonnycanvas = document.getElementById("johnny");
+auracanvas = document.getElementById("aura");
+toiletcanvas = document.getElementById("toilet");
+pennycanvas = document.getElementById("penny");
+
 let aura = 0, auraPerClick = 1, auraPerSecond = 0;
 let cryptoUnlocked = false;
 let lastClickTimes = [];
@@ -227,6 +233,19 @@ setInterval(() => {
   renderStocks();
 }, 100);
 
+let labels = [1];
+const chart = new Chart(mewcanvas, {
+  type: "line",
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Mew Corp',
+      data: [100],
+    }]
+  }
+});
+
+// Update chart data in setInterval
 setInterval(() => {
   [stocks, cryptoStocks].forEach(list => {
     list.forEach(s => {
@@ -236,10 +255,20 @@ setInterval(() => {
       if (s.price < 1) s.price = 1;
       if (s.price > s.high) s.high = s.price;
       if (s.price < s.low) s.low = s.price;
+      
     });
   });
+
+  // Update chart data here
+  chart.data.labels = labels;
+  // Example: update the first dataset with new data (replace with your logic)
+  chart.data.datasets[0].data.push(stocks[0].price); // or your actual data source
+  labels.push(labels.length + 1);
+  chart.update();
+
   renderStocks();
 }, 2000);
+
 function detectCheat() {
   if (Math.abs(aura - lastAuraCheck) > auraPerSecond * 20 + auraPerClick * MAX_CPS * 5) {
     cheatAttempts++;
@@ -255,14 +284,7 @@ function detectCheat() {
 setInterval(detectCheat, 5000);
 updateAuraPerSecond();
 updateUI();
-renderLeaderboard();
 
 window.addEventListener("keydown", () => {
   localStorage.setItem("aura", aura);
 });
-
-mewcanvas = document.getElementById("mew");
-jonnycanvas = document.getElementById("johnny");
-auracanvas = document.getElementById("aura");
-toiletcanvas = document.getElementById("toilet");
-pennycanvas = document.getElementById("penny");
