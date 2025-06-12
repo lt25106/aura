@@ -233,14 +233,62 @@ setInterval(() => {
   renderStocks();
 }, 100);
 
-let labels = [1];
-const chart = new Chart(mewcanvas, {
+let labels = [0];
+const mewchart = new Chart(mewcanvas, {
   type: "line",
   data: {
     labels: labels,
     datasets: [{
       label: 'Mew Corp',
       data: [100],
+    }]
+  }
+});
+
+const johnnychart = new Chart(jonnycanvas, {
+  type: "line",
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Johnny stocks',
+      data: [2],
+      borderColor: "#3da033"
+    }]
+  }
+});
+
+const aurachart = new Chart(auracanvas, {
+  type: "line",
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'AuraBank',
+      data: [85],
+      borderColor: "#894623"
+    }]
+  }
+});
+
+const toiletchart = new Chart(toiletcanvas, {
+  type: "line",
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Toilet Inc',
+      data: [120],
+      borderColor: "#9678ff"
+    }]
+  }
+});
+
+const pennychart = new Chart(pennycanvas, {
+  type: "line",
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'M25106 Penny',
+      data: [15],
+      borderColor: "#dfbb56"
     }]
   }
 });
@@ -255,16 +303,31 @@ setInterval(() => {
       if (s.price < 1) s.price = 1;
       if (s.price > s.high) s.high = s.price;
       if (s.price < s.low) s.low = s.price;
-      
     });
   });
 
   // Update chart data here
-  chart.data.labels = labels;
+  mewchart.data.labels = labels;
   // Example: update the first dataset with new data (replace with your logic)
-  chart.data.datasets[0].data.push(stocks[0].price); // or your actual data source
-  labels.push(labels.length + 1);
-  chart.update();
+  mewchart.data.datasets[0].data.push(stocks[0].price); // or your actual data source
+  johnnychart.data.labels = labels;
+  // Example: update the first dataset with new data (replace with your logic)
+  johnnychart.data.datasets[0].data.push(stocks[1].price); // or your actual data source
+  aurachart.data.labels = labels;
+  // Example: update the first dataset with new data (replace with your logic)
+  aurachart.data.datasets[0].data.push(stocks[2].price); // or your actual data source
+  toiletchart.data.labels = labels;
+  // Example: update the first dataset with new data (replace with your logic)
+  toiletchart.data.datasets[0].data.push(stocks[3].price); // or your actual data source
+  pennychart.data.labels = labels;
+  // Example: update the first dataset with new data (replace with your logic)
+  pennychart.data.datasets[0].data.push(stocks[4].price); // or your actual data source
+  labels.push(labels[labels.length - 1] + 2); // Increment label for next data point
+  mewchart.update();
+  johnnychart.update();
+  aurachart.update();
+  toiletchart.update();
+  pennychart.update();
 
   renderStocks();
 }, 2000);
