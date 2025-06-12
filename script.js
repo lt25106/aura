@@ -233,7 +233,9 @@ setInterval(() => {
   renderStocks();
 }, 100);
 
+const MAX_POINTS = 60; // 2 minutes at 2s interval (60 * 2s = 120s = 2min)
 let labels = [0];
+
 const mewchart = new Chart(mewcanvas, {
   type: "line",
   data: {
@@ -306,23 +308,30 @@ setInterval(() => {
     });
   });
 
-  // Update chart data here
+  // Add new data points
+  mewchart.data.datasets[0].data.push(stocks[0].price);
+  johnnychart.data.datasets[0].data.push(stocks[1].price);
+  aurachart.data.datasets[0].data.push(stocks[2].price);
+  toiletchart.data.datasets[0].data.push(stocks[3].price);
+  pennychart.data.datasets[0].data.push(stocks[4].price);
+  labels.push(labels[labels.length - 1] + 2);
+
+  // Keep only the last MAX_POINTS points
+  if (labels.length > MAX_POINTS) {
+    labels.shift();
+    mewchart.data.datasets[0].data.shift();
+    johnnychart.data.datasets[0].data.shift();
+    aurachart.data.datasets[0].data.shift();
+    toiletchart.data.datasets[0].data.shift();
+    pennychart.data.datasets[0].data.shift();
+  }
+
   mewchart.data.labels = labels;
-  // Example: update the first dataset with new data (replace with your logic)
-  mewchart.data.datasets[0].data.push(stocks[0].price); // or your actual data source
   johnnychart.data.labels = labels;
-  // Example: update the first dataset with new data (replace with your logic)
-  johnnychart.data.datasets[0].data.push(stocks[1].price); // or your actual data source
   aurachart.data.labels = labels;
-  // Example: update the first dataset with new data (replace with your logic)
-  aurachart.data.datasets[0].data.push(stocks[2].price); // or your actual data source
   toiletchart.data.labels = labels;
-  // Example: update the first dataset with new data (replace with your logic)
-  toiletchart.data.datasets[0].data.push(stocks[3].price); // or your actual data source
   pennychart.data.labels = labels;
-  // Example: update the first dataset with new data (replace with your logic)
-  pennychart.data.datasets[0].data.push(stocks[4].price); // or your actual data source
-  labels.push(labels[labels.length - 1] + 2); // Increment label for next data point
+
   mewchart.update();
   johnnychart.update();
   aurachart.update();
