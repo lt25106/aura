@@ -248,7 +248,7 @@ const mewchart = new Chart(mewcanvas, {
     }]
   },
   options: {
-    tension: 0.2
+    tension: 0.5
   }
 });
 
@@ -263,7 +263,7 @@ const johnnychart = new Chart(jonnycanvas, {
     }]
   },
   options: {
-    tension: 0.2
+    tension: 0.5
   }
 });
 
@@ -278,7 +278,7 @@ const aurachart = new Chart(auracanvas, {
     }]
   },
   options: {
-    tension: 0.2
+    tension: 0.5
   }
 });
 
@@ -293,7 +293,7 @@ const toiletchart = new Chart(toiletcanvas, {
     }]
   },
   options: {
-    tension: 0.2
+    tension: 0.5
   }
 });
 
@@ -308,7 +308,7 @@ const pennychart = new Chart(pennycanvas, {
     }]
   },
   options: {
-    tension: 0.2
+    tension: 0.5
   }
 });
 
