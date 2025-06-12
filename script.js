@@ -246,6 +246,9 @@ const mewchart = new Chart(mewcanvas, {
       label: 'Mew Corp',
       data: [100],
     }]
+  },
+  options: {
+    tension: 0.2
   }
 });
 
@@ -258,6 +261,9 @@ const johnnychart = new Chart(jonnycanvas, {
       data: [2],
       borderColor: "#3da033"
     }]
+  },
+  options: {
+    tension: 0.2
   }
 });
 
@@ -270,6 +276,9 @@ const aurachart = new Chart(auracanvas, {
       data: [85],
       borderColor: "#894623"
     }]
+  },
+  options: {
+    tension: 0.2
   }
 });
 
@@ -282,6 +291,9 @@ const toiletchart = new Chart(toiletcanvas, {
       data: [120],
       borderColor: "#9678ff"
     }]
+  },
+  options: {
+    tension: 0.2
   }
 });
 
@@ -294,6 +306,9 @@ const pennychart = new Chart(pennycanvas, {
       data: [15],
       borderColor: "#dfbb56"
     }]
+  },
+  options: {
+    tension: 0.2
   }
 });
 
