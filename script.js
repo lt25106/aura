@@ -233,7 +233,9 @@ setInterval(() => {
   renderStocks();
 }, 100);
 
-const MAX_POINTS = 60; // 2 minutes at 2s interval (60 * 2s = 120s = 2min)
+const input = document.querySelector("input")
+
+let MAX_POINTS = input.value / 2; // 2 minutes at 2s interval (60 * 2s = 120s = 2min)
 let labels = [0];
 
 const mewchart = new Chart(mewcanvas, {
@@ -316,6 +318,8 @@ setInterval(() => {
   pennychart.data.datasets[0].data.push(stocks[4].price);
   labels.push(labels[labels.length - 1] + 2);
 
+
+  MAX_POINTS = input.value / 2; // Update max points based on input value
   // Keep only the last MAX_POINTS points
   if (labels.length > MAX_POINTS) {
     labels.shift();
