@@ -142,7 +142,7 @@ function renderShop() {
     const cost = Math.round(g.baseCost * Math.pow(g.scale, g.amount));
     shop.innerHTML += `
     <div class="item">
-      <div><strong>${g.name}</strong> (${g.amount})<br>+${g.auraGain}/s — Cost: ${cost}</div>
+      <div><strong>${g.name}</strong> (${g.amount})<br>+${Intl.NumberFormat('en-US').format(g.auraGain)}/s — Cost: ${Intl.NumberFormat('en-US').format(cost)}</div>
       <button onclick="buyGen(${i})">Buy</button>
     </div>`;
   });
@@ -155,7 +155,7 @@ function renderUpgrades() {
     if (!u.bought) {
       list.innerHTML += `
         <div class="upgrade">
-          <div><strong>${u.name}</strong><br>Cost: ${u.cost}</div>
+          <div><strong>${u.name}</strong><br>Cost: ${Intl.NumberFormat('en-US').format(u.cost)}</div>
           <button onclick="buyUpgrade(${i})">Buy</button>
         </div>`;
     }
