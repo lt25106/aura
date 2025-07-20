@@ -165,10 +165,10 @@ function renderUpgrades() {
 function renderStocks() {
   const mode = document.getElementById("stock-mode").value;
   const stockList = document.getElementById("stock-list");
-  const list = mode === "normal" ? stocks : cryptoStocks;
-  const owned = mode === "normal" ? stockOwned : cryptoOwned;
+  const list = mode == "normal" ? stocks : cryptoStocks;
+  const owned = mode == "normal" ? stockOwned : cryptoOwned;
   
-  if (mode === "crypto" && !cryptoUnlocked) {
+  if (mode == "crypto" && !cryptoUnlocked) {
     stockList.innerHTML = "<p id='buycrypto'>Buy the crypto upgrade first!</p>";
     return;
   }
@@ -183,8 +183,8 @@ function renderStocks() {
           High: $${s.high} | Low: $${s.low} | You own: ${owned[i] || 0}
         </div>
         <div>
-          <button onclick="${mode === 'normal' ? `buyStock(${i})` : `buyCrypto(${i})`}">Buy</button>
-          <button onclick="${mode === 'normal' ? `sellStock(${i})` : `sellCrypto(${i})`}">Sell</button>
+          <button onclick="${mode == 'normal' ? `buyStock(${i})` : `buyCrypto(${i})`}">Buy</button>
+          <button onclick="${mode == 'normal' ? `sellStock(${i})` : `sellCrypto(${i})`}">Sell</button>
         </div>
       </div>`;
   });
@@ -249,6 +249,36 @@ const mewchart = new Chart(mewcanvas, {
   },
   options: {
     tension: 0.5,
+    plugins: {
+      annotation: {
+        annotations: {
+          high: {
+            type: 'line',
+            yMin: stocks[0].high,
+            yMax: stocks[0].high,
+            borderColor: "#36a2eb",
+            borderWidth: 2,
+            label: {
+              content: 'High',
+              enabled: true,
+              position: 'start'
+            }
+          },
+          low: {
+            type: 'line',
+            yMin: stocks[0].low,
+            yMax: stocks[0].low,
+            borderColor: "#36a2eb",
+            borderWidth: 2,
+            label: {
+              content: 'Low',
+              enabled: true,
+              position: 'start'
+            }
+          }
+        }
+      }
+    }
   }
 });
 
@@ -264,6 +294,28 @@ const johnnychart = new Chart(jonnycanvas, {
   },
   options: {
     tension: 0.5,
+    plugins: {
+      annotation: {
+        annotations: {
+          high: {
+            type: 'line',
+            yMin: stocks[1].high,
+            yMax: stocks[1].high,
+            borderColor: "#3da033",
+            borderWidth: 2,
+            label: { content: 'High', enabled: true, position: 'start' }
+          },
+          low: {
+            type: 'line',
+            yMin: stocks[1].low,
+            yMax: stocks[1].low,
+            borderColor: "#3da033",
+            borderWidth: 2,
+            label: { content: 'Low', enabled: true, position: 'start' }
+          }
+        }
+      }
+    }
   }
 });
 
@@ -279,6 +331,28 @@ const aurachart = new Chart(auracanvas, {
   },
   options: {
     tension: 0.5,
+    plugins: {
+      annotation: {
+        annotations: {
+          high: {
+            type: 'line',
+            yMin: stocks[2].high,
+            yMax: stocks[2].high,
+            borderColor: "#894623",
+            borderWidth: 2,
+            label: { content: 'High', enabled: true, position: 'start' }
+          },
+          low: {
+            type: 'line',
+            yMin: stocks[2].low,
+            yMax: stocks[2].low,
+            borderColor: "#894623",
+            borderWidth: 2,
+            label: { content: 'Low', enabled: true, position: 'start' }
+          }
+        }
+      }
+    }
   }
 });
 
@@ -294,6 +368,28 @@ const toiletchart = new Chart(toiletcanvas, {
   },
   options: {
     tension: 0.5,
+    plugins: {
+      annotation: {
+        annotations: {
+          high: {
+            type: 'line',
+            yMin: stocks[3].high,
+            yMax: stocks[3].high,
+            borderColor: "#9678ff",
+            borderWidth: 2,
+            label: { content: 'High', enabled: true, position: 'start' }
+          },
+          low: {
+            type: 'line',
+            yMin: stocks[3].low,
+            yMax: stocks[3].low,
+            borderColor: "#9678ff",
+            borderWidth: 2,
+            label: { content: 'Low', enabled: true, position: 'start' }
+          }
+        }
+      }
+    }
   }
 });
 
@@ -309,6 +405,28 @@ const pennychart = new Chart(pennycanvas, {
   },
   options: {
     tension: 0.5,
+    plugins: {
+      annotation: {
+        annotations: {
+          high: {
+            type: 'line',
+            yMin: stocks[4].high,
+            yMax: stocks[4].high,
+            borderColor: "#dfbb56",
+            borderWidth: 2,
+            label: { content: 'High', enabled: true, position: 'start' }
+          },
+          low: {
+            type: 'line',
+            yMin: stocks[4].low,
+            yMax: stocks[4].low,
+            borderColor: "#dfbb56",
+            borderWidth: 2,
+            label: { content: 'Low', enabled: true, position: 'start' }
+          }
+        }
+      }
+    }
   }
 });
 
@@ -350,6 +468,31 @@ setInterval(() => {
   aurachart.data.labels = labels;
   toiletchart.data.labels = labels;
   pennychart.data.labels = labels;
+
+  mewchart.options.plugins.annotation.annotations.high.yMin = stocks[0].high;
+  mewchart.options.plugins.annotation.annotations.high.yMax = stocks[0].high;
+  mewchart.options.plugins.annotation.annotations.low.yMin = stocks[0].low;
+  mewchart.options.plugins.annotation.annotations.low.yMax = stocks[0].low;
+
+  johnnychart.options.plugins.annotation.annotations.high.yMin = stocks[1].high;
+  johnnychart.options.plugins.annotation.annotations.high.yMax = stocks[1].high;
+  johnnychart.options.plugins.annotation.annotations.low.yMin = stocks[1].low;
+  johnnychart.options.plugins.annotation.annotations.low.yMax = stocks[1].low;
+
+  aurachart.options.plugins.annotation.annotations.high.yMin = stocks[2].high;
+  aurachart.options.plugins.annotation.annotations.high.yMax = stocks[2].high;
+  aurachart.options.plugins.annotation.annotations.low.yMin = stocks[2].low;
+  aurachart.options.plugins.annotation.annotations.low.yMax = stocks[2].low;
+
+  toiletchart.options.plugins.annotation.annotations.high.yMin = stocks[3].high;
+  toiletchart.options.plugins.annotation.annotations.high.yMax = stocks[3].high;
+  toiletchart.options.plugins.annotation.annotations.low.yMin = stocks[3].low;
+  toiletchart.options.plugins.annotation.annotations.low.yMax = stocks[3].low;
+
+  pennychart.options.plugins.annotation.annotations.high.yMin = stocks[4].high;
+  pennychart.options.plugins.annotation.annotations.high.yMax = stocks[4].high;
+  pennychart.options.plugins.annotation.annotations.low.yMin = stocks[4].low;
+  pennychart.options.plugins.annotation.annotations.low.yMax = stocks[4].low;
 
   mewchart.update();
   johnnychart.update();
