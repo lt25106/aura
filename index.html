@@ -19,21 +19,33 @@
       <h2>🧠 Upgrades</h2>
       <div id="upgrade-list"></div>
     </div>
-    <div class="third">
-      <h2>📈 Stocks</h2>
-      <select id="stock-mode" onchange="renderStocks()">
-        <option value="normal">Normal Stocks</option>
-        <option value="crypto">Crypto Stocks</option>
-      </select>
-      <div id="stock-list"></div>
-      Show last <input type="number" value="120"> seconds of data:
-      <canvas id="mew"></canvas>
-      <canvas id="johnny"></canvas>
-      <canvas id="aura"></canvas>
-      <canvas id="toilet"></canvas>
-      <canvas id="penny"></canvas>
-    </div>
   </div>
+    <div class="card triple-container">
+      <div class="third">
+        <h2>📈 Stocks</h2>
+        <select id="stock-mode" onchange="renderStocks()">
+          <option value="normal">Normal Stocks</option>
+          <option value="crypto">Crypto Stocks</option>
+        </select>
+        <div id="stock-list"></div>
+        Show last <input type="number" value="120"> seconds of data:
+        <div class="Stocks">
+          <canvas id="mew"></canvas><button>Buy</button><button>Sell</button>
+        </div>
+        <div class="Stocks">
+          <canvas id="johnny"></canvas><button>Buy</button><button>Sell</button>
+        </div>
+        <div class="Stocks">
+          <canvas id="aura"></canvas><button>Buy</button><button>Sell</button>
+        </div>
+        <div class="Stocks">
+          <canvas id="toilet"></canvas><button>Buy</button><button>Sell</button>
+        </div>
+        <div class="Stocks">
+          <canvas id="penny"></canvas><button>Buy</button><button>Sell</button>
+        </div>
+      </div>
+    </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
   <footer><p>The creator is not responsible for this if you are caught by any teacher.</p></footer>
