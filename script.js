@@ -4,7 +4,7 @@ auracanvas = document.getElementById("aura");
 toiletcanvas = document.getElementById("toilet");
 pennycanvas = document.getElementById("penny");
 
-let aura = 0, auraPerClick = 1, auraPerSecond = 0;
+let aura = +localStorage.getItem("aura") || 0, auraPerClick = 1, auraPerSecond = 0;
 let lastClickTimes = [];
 const MAX_CPS = 25;// clicks per second
 const MAX_LEGAL_CLICK_POWER = 30000;
