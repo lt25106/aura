@@ -5,7 +5,6 @@ toiletcanvas = document.getElementById("toilet");
 pennycanvas = document.getElementById("penny");
 
 let aura = 0, auraPerClick = 1, auraPerSecond = 0;
-let cryptoUnlocked = false;
 let lastClickTimes = [];
 const MAX_CPS = 25;// clicks per second
 const MAX_LEGAL_CLICK_POWER = 30000;
@@ -40,7 +39,6 @@ const upgrades = [
 {name: "Sigma Caden x2", cost: 500000000, effect: () => generators[8].auraGain *= 2, bought: false},
 {name: "YUSU helps (x10 click)", cost: 2000000000, effect: () => auraPerClick *= 10, bought: false},
 {name: "Yuansan helps (x10 click)", cost: 9000000000, effect: () => auraPerClick *= 10, bought: false},
-{name: "Unlock Crypto Stocks 💎", cost: 10000000000, effect: () => cryptoUnlocked = true, bought: false},
 {name: "Xuhui upgrade", cost: 90909090909, effect: () => generators[10].auraGain *= 2.5, bought: false} ,
 {name: ":Shreyas Helps", cost: 90909090969, effect: () => auraPerClick *= 5, bought: false},
 {name: "Uno Reverse", cost: 694206942069, effect: () => auraPerClick *= 9999, bought: false},
@@ -56,14 +54,7 @@ const stocks = [
 {name: "M25106 Penny", price: 15, high: 15, low: 15, last: 15} 
 ];
 
-const cryptoStocks = [
-{name: "MewCoin", price: 500000, high: 500000, low: 500000, last: 500000},
-{name: "XynCash", price: 800000, high: 800000, low: 800000, last: 800000},
-{name: "CadenETH", price: 1300000, high: 1300000, low: 1300000, last: 1300000}
-];
-
 let stockOwned = Array(stocks.length).fill(0);
-let cryptoOwned = Array(cryptoStocks.length).fill(0);
 
 document.getElementById("click-btn").onclick = () => {
   const now = Date.now();
@@ -163,30 +154,9 @@ function renderUpgrades() {
 }
 
 function renderStocks() {
-  const mode = document.getElementById("stock-mode").value;
-  const stockList = document.getElementById("stock-list");
-  const list = mode == "normal" ? stocks : cryptoStocks;
-  const owned = mode == "normal" ? stockOwned : cryptoOwned;
-  
-  if (mode == "crypto" && !cryptoUnlocked) {
-    stockList.innerHTML = "<p id='buycrypto'>Buy the crypto upgrade first!</p>";
-    return;
-  }
-  
-  stockList.innerHTML = "";
-  list.forEach((s, i) => {
-    const arrow = s.price > s.last ? "⬆️" : s.price < s.last ? "⬇️" : "➡️";
-    stockList.innerHTML += `
-      <div class="stock">
-        <div>
-          <strong>${s.name}</strong>: $${s.price} <span class="stock-arrow">${arrow}</span><br>
-          High: $${s.high} | Low: $${s.low} | You own: ${owned[i] || 0}
-        </div>
-        <div>
-          <button onclick="${mode == 'normal' ? `buyStock(${i})` : `buyCrypto(${i})`}">Buy</button>
-          <button onclick="${mode == 'normal' ? `sellStock(${i})` : `sellCrypto(${i})`}">Sell</button>
-        </div>
-      </div>`;
+  const youowns = document.querySelectorAll(".Stocks span");
+  youowns.forEach((span, i) => {
+    span.textContent = `You own: ${stockOwned[i] || 0}`;
   });
 }
 
@@ -203,23 +173,6 @@ function sellStock(i) {
   if (stockOwned[i] > 0) {
     aura += stocks[i].price;
     stockOwned[i]--;
-    updateUI();
-  }
-}
-
-function buyCrypto(i) {
-  const s = cryptoStocks[i];
-  if (aura >= s.price) {
-    aura -= s.price;
-    cryptoOwned[i] = (cryptoOwned[i] || 0) + 1;
-    updateUI();
-  }
-}
-
-function sellCrypto(i) {
-  if (cryptoOwned[i] > 0) {
-    aura += cryptoStocks[i].price;
-    cryptoOwned[i]--;
     updateUI();
   }
 }
@@ -432,7 +385,7 @@ const pennychart = new Chart(pennycanvas, {
 
 // Update chart data in setInterval
 setInterval(() => {
-  [stocks, cryptoStocks].forEach(list => {
+  [stocks].forEach(list => {
     list.forEach(s => {
       s.last = s.price;
       const change = Math.floor(Math.random() * 11 - 5);

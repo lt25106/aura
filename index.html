@@ -23,41 +23,37 @@
     <div class="card triple-container">
       <div class="third">
         <h2>📈 Stocks</h2>
-        <select id="stock-mode" onchange="renderStocks()">
-          <option value="normal">Normal Stocks</option>
-          <option value="crypto">Crypto Stocks</option>
-        </select>
         <div id="stock-list"></div>
         Show last <input type="number" value="120"> seconds of data:
         <div class="Stocks">
           <canvas id="mew"></canvas>
-          <button onclick="buyStock(owned[0])">Buy</button>
-          You own:
-          <button>Sell</button>
+          <button onclick="buyStock(0)">Buy</button>
+          <span>You own:</span>
+          <button onclick="sellStock(0)">Sell</button>
         </div>
         <div class="Stocks">
           <canvas id="johnny"></canvas>
-          <button onclick="buyStock(owned[1])">Buy</button>
-          You own:
-          <button>Sell</button>
+          <button onclick="buyStock(1)">Buy</button>
+          <span>You own:</span>
+          <button onclick="sellStock(1)">Sell</button>
         </div>
         <div class="Stocks">
           <canvas id="aura"></canvas>
-          <button onclick="buyStock(owned[2])">Buy</button>
-          You own:
-          <button>Sell</button>
+          <button onclick="buyStock(2)">Buy</button>
+          <span>You own:</span>
+          <button onclick="sellStock(2)">Sell</button>
         </div>
         <div class="Stocks">
           <canvas id="toilet"></canvas>
-          <button onclick="buyStock(owned[3])">Buy</button>
-          You own:
-          <button>Sell</button>
+          <button onclick="buyStock(3)">Buy</button>
+          <span>You own:</span>
+          <button onclick="sellStock(3)">Sell</button>
         </div>
         <div class="Stocks">
           <canvas id="penny"></canvas>
-          <button onclick="buyStock(owned[4])">Buy</button>
-          You own:
-          <button>Sell</button>
+          <button onclick="buyStock(4)">Buy</button>
+          <span>You own:</span>
+          <button onclick="sellStock(4)">Sell</button>
         </div>
       </div>
     </div>
