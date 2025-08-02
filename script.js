@@ -191,6 +191,17 @@ const input = document.querySelector("input")
 let MAX_POINTS = input.value / 2; // 2 minutes at 2s interval (60 * 2s = 120s = 2min)
 let labels = [0];
 
+const scales = {
+  x: {
+    ticks: { color: "#fff" }, // Change to your desired color
+    title: { color: "#fff" }
+  },
+  y: {
+    ticks: { color: "#fff" },
+    title: { color: "#fff" }
+  }
+}
+
 const mewchart = new Chart(mewcanvas, {
   type: "line",
   data: {
@@ -202,6 +213,7 @@ const mewchart = new Chart(mewcanvas, {
   },
   options: {
     tension: 0.5,
+    scales: scales,
     plugins: {
       annotation: {
         annotations: {
@@ -247,6 +259,7 @@ const johnnychart = new Chart(jonnycanvas, {
   },
   options: {
     tension: 0.5,
+    scales: scales,
     plugins: {
       annotation: {
         annotations: {
@@ -284,6 +297,7 @@ const aurachart = new Chart(auracanvas, {
   },
   options: {
     tension: 0.5,
+    scales: scales,
     plugins: {
       annotation: {
         annotations: {
@@ -321,6 +335,7 @@ const toiletchart = new Chart(toiletcanvas, {
   },
   options: {
     tension: 0.5,
+    scales: scales,
     plugins: {
       annotation: {
         annotations: {
@@ -358,6 +373,7 @@ const pennychart = new Chart(pennycanvas, {
   },
   options: {
     tension: 0.5,
+    scales: scales,
     plugins: {
       annotation: {
         annotations: {
