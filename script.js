@@ -116,6 +116,7 @@ function buyUpgrade(i) {
 
 function updateAuraPerSecond() {
   auraPerSecond = generators.reduce((sum, g) => sum + g.amount * g.auraGain, 0);
+  localStorage.setItem("aura", aura);
 }
 
 function updateUI() {
@@ -127,6 +128,7 @@ function updateUI() {
   renderShop();
   renderUpgrades();
   renderStocks();
+  localStorage.setItem("aura", aura);
 }
 
 function renderShop() {
@@ -321,8 +323,6 @@ setInterval(() => {
   renderStocks();
 
   console.log()
-
-  localStorage.setItem("aura", aura);
 }, 2000);
 
 // function detectCheat() {
