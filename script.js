@@ -297,30 +297,19 @@ setInterval(() => {
   toiletchart.data.labels = labels;
   pennychart.data.labels = labels;
 
-  mewchart.options.plugins.annotation.annotations.high.yMin = stocks[0].high;
-  mewchart.options.plugins.annotation.annotations.high.yMax = stocks[0].high;
-  mewchart.options.plugins.annotation.annotations.low.yMin = stocks[0].low;
-  mewchart.options.plugins.annotation.annotations.low.yMax = stocks[0].low;
-
-  johnnychart.options.plugins.annotation.annotations.high.yMin = stocks[1].high;
-  johnnychart.options.plugins.annotation.annotations.high.yMax = stocks[1].high;
-  johnnychart.options.plugins.annotation.annotations.low.yMin = stocks[1].low;
-  johnnychart.options.plugins.annotation.annotations.low.yMax = stocks[1].low;
-
-  aurachart.options.plugins.annotation.annotations.high.yMin = stocks[2].high;
-  aurachart.options.plugins.annotation.annotations.high.yMax = stocks[2].high;
-  aurachart.options.plugins.annotation.annotations.low.yMin = stocks[2].low;
-  aurachart.options.plugins.annotation.annotations.low.yMax = stocks[2].low;
-
-  toiletchart.options.plugins.annotation.annotations.high.yMin = stocks[3].high;
-  toiletchart.options.plugins.annotation.annotations.high.yMax = stocks[3].high;
-  toiletchart.options.plugins.annotation.annotations.low.yMin = stocks[3].low;
-  toiletchart.options.plugins.annotation.annotations.low.yMax = stocks[3].low;
-
-  pennychart.options.plugins.annotation.annotations.high.yMin = stocks[4].high;
-  pennychart.options.plugins.annotation.annotations.high.yMax = stocks[4].high;
-  pennychart.options.plugins.annotation.annotations.low.yMin = stocks[4].low;
-  pennychart.options.plugins.annotation.annotations.low.yMax = stocks[4].low;
+  // DRY: Update chart annotation lines for all charts/stocks in a loop
+  [
+    [mewchart, 0],
+    [johnnychart, 1],
+    [aurachart, 2],
+    [toiletchart, 3],
+    [pennychart, 4]
+  ].forEach(([chart, idx]) => {
+    chart.options.plugins.annotation.annotations.high.yMin = stocks[idx].high;
+    chart.options.plugins.annotation.annotations.high.yMax = stocks[idx].high;
+    chart.options.plugins.annotation.annotations.low.yMin = stocks[idx].low;
+    chart.options.plugins.annotation.annotations.low.yMax = stocks[idx].low;
+  });
 
   mewchart.update();
   johnnychart.update();
