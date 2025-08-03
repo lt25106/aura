@@ -1,8 +1,9 @@
-mewcanvas = document.getElementById("mew");
-jonnycanvas = document.getElementById("johnny");
-auracanvas = document.getElementById("aura");
-toiletcanvas = document.getElementById("toilet");
-pennycanvas = document.getElementById("penny");
+const mewcanvas = document.getElementById("mew");
+const jonnycanvas = document.getElementById("johnny");
+const auracanvas = document.getElementById("aura");
+const toiletcanvas = document.getElementById("toilet");
+const pennycanvas = document.getElementById("penny");
+const snp5canvas = document.getElementById("snp5");
 
 let aura = +localStorage.getItem("aura") || 0, auraPerClick = 1, auraPerSecond = 0;
 let lastClickTimes = [];
@@ -257,7 +258,17 @@ const johnnychart = charts(jonnycanvas, 'Johnny stocks', 2, 1, "#3da033");
 const aurachart = charts(auracanvas, 'AuraBank', 85, 2, "#894623");
 const toiletchart = charts(toiletcanvas, 'Toilet Inc', 120, 3, "#9678ff");
 const pennychart = charts(pennycanvas, 'M25106 Penny', 15, 4, "#dfbb56");
+const snp5chart = charts(snp5canvas, 'S&P 5', 64, 5, "#3b48d8");
 
+
+const chartnums = [
+  [mewchart, 0],
+  [johnnychart, 1],
+  [aurachart, 2],
+  [toiletchart, 3],
+  [pennychart, 4],
+  [snp5chart, 5]
+]
 // Update chart data in setInterval
 setInterval(() => {
   [stocks].forEach(list => {
@@ -270,52 +281,31 @@ setInterval(() => {
       if (s.price < s.low) s.low = s.price;
     });
   });
-
   // Add new data points
-  mewchart.data.datasets[0].data.push(stocks[0].price);
-  johnnychart.data.datasets[0].data.push(stocks[1].price);
-  aurachart.data.datasets[0].data.push(stocks[2].price);
-  toiletchart.data.datasets[0].data.push(stocks[3].price);
-  pennychart.data.datasets[0].data.push(stocks[4].price);
   labels.push(labels[labels.length - 1] + 2);
-
 
   MAX_POINTS = input.value / 2; // Update max points based on input value
   // Keep only the last MAX_POINTS points
   if (labels.length > MAX_POINTS) {
     labels.shift();
-    mewchart.data.datasets[0].data.shift();
-    johnnychart.data.datasets[0].data.shift();
-    aurachart.data.datasets[0].data.shift();
-    toiletchart.data.datasets[0].data.shift();
-    pennychart.data.datasets[0].data.shift();
+    chartnums.forEach(([chart]) => {
+      chart.data.datasets[0].data.shift();
+    })
   }
 
-  mewchart.data.labels = labels;
-  johnnychart.data.labels = labels;
-  aurachart.data.labels = labels;
-  toiletchart.data.labels = labels;
-  pennychart.data.labels = labels;
-
   // DRY: Update chart annotation lines for all charts/stocks in a loop
-  [
-    [mewchart, 0],
-    [johnnychart, 1],
-    [aurachart, 2],
-    [toiletchart, 3],
-    [pennychart, 4]
-  ].forEach(([chart, idx]) => {
+  chartnums.forEach(([chart, idx]) => {
+    chart.data.datasets[0].data.push(stocks[idx].price);
     chart.options.plugins.annotation.annotations.high.yMin = stocks[idx].high;
     chart.options.plugins.annotation.annotations.high.yMax = stocks[idx].high;
     chart.options.plugins.annotation.annotations.low.yMin = stocks[idx].low;
     chart.options.plugins.annotation.annotations.low.yMax = stocks[idx].low;
   });
-
-  mewchart.update();
-  johnnychart.update();
-  aurachart.update();
-  toiletchart.update();
-  pennychart.update();
+  
+  chartnums.forEach(([chart]) => {
+    chart.data.labels = labels;
+    chart.update();
+  })
 
   renderStocks();
 
