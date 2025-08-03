@@ -255,7 +255,7 @@ function charts(canvasname, canvaslabel, initialprice, stocknumber, color) {
 
 const mewchart = charts(mewcanvas, 'Mew Corp', 100, 0, "#36a2eb");
 const johnnychart = charts(jonnycanvas, 'Johnny stocks', 2, 1, "#3da033");
-const aurachart = charts(auracanvas, 'AuraBank', 85, 2, "#894623");
+const aurachart = charts(auracanvas, 'AuraBank', 85, 2, "#B65E2F");
 const toiletchart = charts(toiletcanvas, 'Toilet Inc', 120, 3, "#9678ff");
 const pennychart = charts(pennycanvas, 'M25106 Penny', 15, 4, "#dfbb56");
 const snp5chart = charts(snp5canvas, 'S&P 5', 64, 5, "#3b48d8");
