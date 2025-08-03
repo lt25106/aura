@@ -51,7 +51,8 @@ const stocks = [
 {name: "Johnny stocks", price: 2, high: 2, low: 2, last: 2},
 {name: "AuraBank", price: 85, high: 85, low: 85, last: 85},
 {name: "Toilet Inc.", price: 120, high: 120, low: 120, last: 120},
-{name: "M25106 Penny", price: 15, high: 15, low: 15, last: 15} 
+{name: "M25106 Penny", price: 15, high: 15, low: 15, last: 15},
+{name: "S&P 5", price: 64, high: 64, low: 64, last: 64}
 ];
 
 let stockOwned = Array(stocks.length).fill(0);
@@ -69,6 +70,7 @@ document.getElementById("click-btn").onclick = () => {
       document.getElementById("click-btn").disabled = true;
       document.getElementById("click-btn").style.backgroundColor = "rgba(255, 234, 167,0.5)";
       alert("🚫 Clicker disabled due to suspicious activity.");
+      aura = 0;
     }
     return;
   }
@@ -202,202 +204,59 @@ const scales = {
   }
 }
 
-const mewchart = new Chart(mewcanvas, {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [{
-      label: 'Mew Corp',
-      data: [100],
-    }]
-  },
-  options: {
-    tension: 0.5,
-    scales: scales,
-    plugins: {
-      annotation: {
-        annotations: {
-          high: {
-            type: 'line',
-            yMin: stocks[0].high,
-            yMax: stocks[0].high,
-            borderColor: "#36a2eb",
-            borderWidth: 2,
-            label: {
-              content: 'High',
-              enabled: true,
-              position: 'start'
+function charts(canvasname, canvaslabel, initialprice, stocknumber, color) {
+  return new Chart(canvasname, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: canvaslabel,
+        data: [initialprice],
+        borderColor: color
+      }]
+    },
+    options: {
+      tension: 0.5,
+      scales: scales,
+      plugins: {
+        annotation: {
+          annotations: {
+            high: {
+              type: "line",
+              yMin: stocks[stocknumber].high,
+              yMax: stocks[stocknumber].high,
+              borderColor: color,
+              borderWidth: 2,
+              label: {
+                content: 'High',
+                enabled: true,
+                position: 'start'
+              }
+            },
+            low: {
+              type: "line",
+              yMin: stocks[stocknumber].low,
+              yMax: stocks[stocknumber].low,
+              borderColor: color,
+              borderWidth: 2,
+              label: {
+                content: 'Low',
+                enabled: true,
+                position: 'start'
+              }
             }
-          },
-          low: {
-            type: 'line',
-            yMin: stocks[0].low,
-            yMax: stocks[0].low,
-            borderColor: "#36a2eb",
-            borderWidth: 2,
-            label: {
-              content: 'Low',
-              enabled: true,
-              position: 'start'
-            }
           }
         }
       }
     }
-  }
-});
+  })
+}
 
-const johnnychart = new Chart(jonnycanvas, {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [{
-      label: 'Johnny stocks',
-      data: [2],
-      borderColor: "#3da033"
-    }]
-  },
-  options: {
-    tension: 0.5,
-    scales: scales,
-    plugins: {
-      annotation: {
-        annotations: {
-          high: {
-            type: 'line',
-            yMin: stocks[1].high,
-            yMax: stocks[1].high,
-            borderColor: "#3da033",
-            borderWidth: 2,
-            label: { content: 'High', enabled: true, position: 'start' }
-          },
-          low: {
-            type: 'line',
-            yMin: stocks[1].low,
-            yMax: stocks[1].low,
-            borderColor: "#3da033",
-            borderWidth: 2,
-            label: { content: 'Low', enabled: true, position: 'start' }
-          }
-        }
-      }
-    }
-  }
-});
-
-const aurachart = new Chart(auracanvas, {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [{
-      label: 'AuraBank',
-      data: [85],
-      borderColor: "#894623"
-    }]
-  },
-  options: {
-    tension: 0.5,
-    scales: scales,
-    plugins: {
-      annotation: {
-        annotations: {
-          high: {
-            type: 'line',
-            yMin: stocks[2].high,
-            yMax: stocks[2].high,
-            borderColor: "#894623",
-            borderWidth: 2,
-            label: { content: 'High', enabled: true, position: 'start' }
-          },
-          low: {
-            type: 'line',
-            yMin: stocks[2].low,
-            yMax: stocks[2].low,
-            borderColor: "#894623",
-            borderWidth: 2,
-            label: { content: 'Low', enabled: true, position: 'start' }
-          }
-        }
-      }
-    }
-  }
-});
-
-const toiletchart = new Chart(toiletcanvas, {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [{
-      label: 'Toilet Inc',
-      data: [120],
-      borderColor: "#9678ff"
-    }]
-  },
-  options: {
-    tension: 0.5,
-    scales: scales,
-    plugins: {
-      annotation: {
-        annotations: {
-          high: {
-            type: 'line',
-            yMin: stocks[3].high,
-            yMax: stocks[3].high,
-            borderColor: "#9678ff",
-            borderWidth: 2,
-            label: { content: 'High', enabled: true, position: 'start' }
-          },
-          low: {
-            type: 'line',
-            yMin: stocks[3].low,
-            yMax: stocks[3].low,
-            borderColor: "#9678ff",
-            borderWidth: 2,
-            label: { content: 'Low', enabled: true, position: 'start' }
-          }
-        }
-      }
-    }
-  }
-});
-
-const pennychart = new Chart(pennycanvas, {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [{
-      label: 'M25106 Penny',
-      data: [15],
-      borderColor: "#dfbb56"
-    }]
-  },
-  options: {
-    tension: 0.5,
-    scales: scales,
-    plugins: {
-      annotation: {
-        annotations: {
-          high: {
-            type: 'line',
-            yMin: stocks[4].high,
-            yMax: stocks[4].high,
-            borderColor: "#dfbb56",
-            borderWidth: 2,
-            label: { content: 'High', enabled: true, position: 'start' }
-          },
-          low: {
-            type: 'line',
-            yMin: stocks[4].low,
-            yMax: stocks[4].low,
-            borderColor: "#dfbb56",
-            borderWidth: 2,
-            label: { content: 'Low', enabled: true, position: 'start' }
-          }
-        }
-      }
-    }
-  }
-});
+const mewchart = charts(mewcanvas, 'Mew Corp', 100, 0, "#36a2eb");
+const johnnychart = charts(jonnycanvas, 'Johnny stocks', 2, 1, "#3da033");
+const aurachart = charts(auracanvas, 'AuraBank', 85, 2, "#894623");
+const toiletchart = charts(toiletcanvas, 'Toilet Inc', 120, 3, "#9678ff");
+const pennychart = charts(pennycanvas, 'M25106 Penny', 15, 4, "#dfbb56");
 
 // Update chart data in setInterval
 setInterval(() => {
@@ -470,6 +329,8 @@ setInterval(() => {
   pennychart.update();
 
   renderStocks();
+
+  localStorage.setItem("aura", aura);
 }, 2000);
 
 // function detectCheat() {
@@ -487,7 +348,3 @@ setInterval(() => {
 // setInterval(detectCheat, 5000);
 updateAuraPerSecond();
 updateUI();
-
-window.addEventListener("keydown", () => {
-  localStorage.setItem("aura", aura);
-});
