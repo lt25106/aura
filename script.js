@@ -286,12 +286,11 @@ setInterval(() => {
   });
 
   // Calculate S&P 5 as the rounded average of the other stocks
-  const avg = Math.round(
+  stocks[5].price = Math.round(
     stocks.slice(0, 5).reduce((sum, s) => sum + s.price, 0) / 5
   );
-  stocks[5].price = avg;
-  if (avg > stocks[5].high) stocks[5].high = avg;
-  if (avg < stocks[5].low) stocks[5].low = avg;
+  if (stocks[5].price > stocks[5].high) stocks[5].high = stocks[5].price;
+  if (stocks[5].price < stocks[5].low) stocks[5].low = stocks[5].price;
 
   // Add new data points
   labels.push(labels[labels.length - 1] + 2);
@@ -320,6 +319,8 @@ setInterval(() => {
   })
 
   renderStocks();
+
+  console.log()
 
   localStorage.setItem("aura", aura);
 }, 2000);
