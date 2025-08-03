@@ -272,15 +272,27 @@ const chartnums = [
 // Update chart data in setInterval
 setInterval(() => {
   [stocks].forEach(list => {
-    list.forEach(s => {
+    list.forEach((s, i) => {
       s.last = s.price;
-      const change = Math.floor(Math.random() * 11 - 5);
-      s.price += change;
-      if (s.price < 1) s.price = 1;
-      if (s.price > s.high) s.high = s.price;
-      if (s.price < s.low) s.low = s.price;
+      if (i < 5) { // Only randomize the first 5 stocks
+        const change = Math.floor(Math.random() * 11 - 5);
+        s.price += change;
+        if (s.price < 1) s.price = 1;
+        if (s.price > s.high) s.high = s.price;
+        if (s.price < s.low) s.low = s.price;
+      }
+      // S&P 5 (i == 5) is handled separately below
     });
   });
+
+  // Calculate S&P 5 as the rounded average of the other stocks
+  const avg = Math.round(
+    stocks.slice(0, 5).reduce((sum, s) => sum + s.price, 0) / 5
+  );
+  stocks[5].price = avg;
+  if (avg > stocks[5].high) stocks[5].high = avg;
+  if (avg < stocks[5].low) stocks[5].low = avg;
+
   // Add new data points
   labels.push(labels[labels.length - 1] + 2);
 
