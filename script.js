@@ -58,7 +58,8 @@ const stocks = [
 
 let stockOwned = Array(stocks.length).fill(0);
 
-document.getElementById("click-btn").onclick = () => {
+function clickbtnpressed() {
+  // Record click time
   const now = Date.now();
   lastClickTimes.push(now);
   lastClickTimes = lastClickTimes.filter(t => now - t < 1000);// last 1 sec
